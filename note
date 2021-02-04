@@ -1,0 +1,119 @@
+- c 
+  c89 - first c standard
+  c99 - followed ever since
+  string - c actually has no datatype of string but concept of string (but character arrays and string.h functions make them accessible)
+
+  Literals -
+    in c89 literals are values of any basic datatypes
+	in c99 literals are constant values having const types
+
+    literal -	in c89 -							in c99
+    234 -		(int) decimal -						(const int)
+	0233 -		(int) octal 233 number -			(const int)	
+	0b101 -		(int) binary 101 number -			(const int)	
+	0xF8 -		(int) hexagonal F8 -				(const int)	
+	3.14 -		(double) floating-point literal -	(const double)
+	'x' -		(char) character -					(const char)
+	"hello" -	(char *) string literal -			(const char*)
+
+  Memory allocations -
+
+    - malloc -> free(p)
+
+  Functions	-
+    - call by value
+	- call by address
+
+- c++ vs c
+
+  c libraries have no .h -> c is added before their names
+    example ->   stdio.h  -> cstdio
+				 stdlib.h -> cstdlib
+				 math.h   -> cmath
+  dynamical memory allocations
+    malloc vs new operator in cpp
+		new operator -
+		  delete to free memory
+ 
+ strings
+   char array (C-string) in c vs strings in c++ 
+   c uses string.h library for strings while in c++ there is string library
+   c strings are char arrays terminated by NULL while c++ strings are derived but defined types and have defined arithmatic operators like + for concatenation.
+ 
+ sort functions
+ search functions
+
+- stack
+  lifo
+
+  <stack>
+
+- manifest constants, const variables, inline functions
+  
+  const variables must be initialised when defined
+
+  advantage of const over #define variable is that const variables can be used in any scope, #defined constants are globally scoped
+
+    const int * const p;  -> pointer pointing to constant data, and also can point to only one location
+	const int *p ;		  -> pointer pointig to constant data, but can point to a different data, that data too being not able to be changed by this pointer
+	int * const p;		  -> pointer pointing to a mutable data location, but can't point to another variable.
+  
+  cv-qualifier -
+    void fun(){
+		int i =0;
+		while (i!=100) ;			//infinite loop
+	}
+	 compiler changes it to ->
+	void fun(){
+		int i=0;
+		while(1);
+		//    ^
+	}
+
+	 but using " volatile int i" while declaring would not make this change at compilation
+  
+  inline-function - recognised by compiler as function. may be text substituted by compiler, decision resides with compiler.
+
+- reference vars
+   must be initialised when declared
+
+- default values (for function parameters)
+
+- function overloading
+  many functions with different function protype but same name
+  *functions that differ only in return type, can't be overloaded
+
+- classes
+  this -> is a pointer in c++ to the same object, used only in methods
+
+  1.private members of a class can only be accessed by member functions of the same class, whereass public members can be accessed by global functions as well as other class' member functions
+  2.placing all data members in private section and member functions in public
+   --> these implement Information Hiding
+- constructor
+  life of an object starts when constructor body starts, and ends when scope of the object ends, i.e when it is to be destroyed.
+  initialiser lists are to be used for construction of the object.
+    - data members which are defined first are initialised first, even if they occur after other data members in initialiser list
+	- for multiple objects, they are constructed in the order they are created in code. The destruction is in reverse order
+	- when an array of objects is defined, objects are constructed in serial order, 0th index is constructed first, then 1st index, and so on. the destruction happens in reverse order.
+	- for global scope objects, i.e which are defined before main, their construction occurs before main() execution, and destruction occurs after main() has executed.
+	- using new operator for object creation calls the constructor, and delete operator frees memory and also calls for the destructor.
+
+  copy constructor -
+    required when new objects are initialised using pre defined objects.
+	  ->  Student s1("John","3rd Grade");
+	      Student s2(s1);
+	required for functions with call by value (to copy the object to function scope)
+	  -> otherwise free copy constructor is provided by compiler, which does bit-copy/shallow-copy on objects, which is disastrous for user defined datatypes as class members
+
+  copy assignment -
+    differs from copy constructor in the way that object already exists.
+	  Complex& operator= (const Complex& com) ;
+	  ->  obj1 = obj2;
+
+- const objects
+   - making an object const makes the this pointer of class as `const myclass * const this`
+   - all data members become immutable
+   - member functions can't be invoked, as they may change data members 
+    -> this makes the problem of accessing data members even without changing them.
+	 -> const member function -
+	    -  void print() const { ... }
