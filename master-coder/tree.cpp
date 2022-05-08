@@ -6,12 +6,12 @@
 #include<iostream>
 #include<vector>
 
-#define node treenode
-#define nodep treenode *
+// #define node treenode
+// #define nodep treenode *
 
 using namespace std;
 
-struct treenode {
+typedef struct treenode {
 	int data;
 	treenode* left;
 	treenode* right;
@@ -23,7 +23,7 @@ struct treenode {
 		this->right = NULL;
 	}
 
-};
+}node,*nodep;
 
 /*
  * this function takes an integer array as input
